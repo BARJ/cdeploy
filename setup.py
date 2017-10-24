@@ -7,7 +7,7 @@ setup(
     author='David McHoull',
     author_email='dmchoull@gmail.com',
     license='http://www.apache.org/licenses/LICENSE-2.0',
-    url='https://github.com/rackerlabs/cdeploy',
+    url='https://github.com/barj/cdeploy',
     keywords=['cassandra', 'migrations'],
     packages=find_packages(),
     install_requires=['PyYAML', 'cassandra-driver>=3.0.0'],

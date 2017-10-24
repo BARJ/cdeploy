@@ -1,4 +1,4 @@
-cdeploy [![Build Status](https://travis-ci.org/rackerlabs/cdeploy.svg?branch=master)](https://travis-ci.org/rackerlabs/cdeploy)
+cdeploy
 =======
 
 cdeploy is a simple tool to manage your Cassandra schema migrations in the style of [dbdeploy](http://dbdeploy.com/)

@@ -9,7 +9,7 @@ class CQLExecutor:
     def init_table(session):
         session.execute("""
             CREATE TABLE IF NOT EXISTS schema_migrations
-                    (type text, version int, PRIMARY KEY(type, version))
+                    (type text, version bigint, PRIMARY KEY(type, version))
                 WITH COMMENT = 'Schema migration history'
                 AND CLUSTERING ORDER BY (version DESC)
         """)
@@ -51,12 +51,20 @@ class CQLExecutor:
 
 def parse_cql(section_func, script):
     section_to_run = section_func(script)
-    collapsed_script = section_to_run.replace('\n', ' ')
-    statements = [
-        line.strip() for line in collapsed_script.split(';')
-        if line.strip() != ''
-    ]
+    statements = split_statements(section_to_run)
     return statements
+
+def split_statements(script):
+    x, xs = "", []
+    for i, char in enumerate(script):
+        if char == ';' and (i == len(script)-1 or script[i+1] == '\n'):
+            xs.append(x)
+            x = ''
+        else:
+            x += char
+
+    xs = [' '.join(x.split()) for x in xs]
+    return xs
 
 
 def migration_section_of(script):
